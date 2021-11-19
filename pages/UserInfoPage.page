@@ -1,0 +1,64 @@
+<apex:page controller="loginPageController" sidebar="false" showHeader="false">
+	<apex:slds />
+    <apex:form styleClass="slds-scope slds-box">
+        <apex:pageBlock rendered="{!editstatus == false}" title="User Info">
+            <div class="slds-box">
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Login: "/>
+                        <apex:outputField value="{!user.Login__c}"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Name: "/>
+                        <apex:outputField value="{!user.Name__c}"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Owner: "/>
+                        <apex:outputField value="{!user.OwnerId}"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Email: "/>
+                        <apex:outputField value="{!user.Email__c}"/>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:commandButton action="{!editaccount}" value="Edit"/>
+                <apex:actionSupport action="{!saveAttachment}" reRender="Attachments"/>
+            </div>
+            <div class="slds-box">
+            <apex:pageBlockTable value="{!attachment}" var="a" id="Attachments" styleClass="slds-box">
+                <apex:column value="{!a.Name}"/>
+                <apex:column value="{!a.Description__c}"/>
+            </apex:pageBlockTable>
+            <apex:pageBlockSection title="New Attachment">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Name: "/>
+                    <apex:inputText value="{!nameAttachment}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Description: "/>
+                    <apex:inputTextarea value="{!descriptionAttachment}"/>
+                </apex:pageBlockSectionItem>
+                <apex:commandButton action="{!saveAttachment}" value="Save"/>
+                <apex:commandButton action="{!logout}" value="Log Out"/>
+            </apex:pageBlockSection>
+        </div>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!editstatus == true}">
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Login: "/>
+                    <apex:inputText value="{!username}" html-placeholder="{!user.Login__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Name: "/>
+                    <apex:inputText value="{!name}" html-placeholder="{!user.Name__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Email: "/>
+                    <apex:inputText value="{!email}" html-placeholder="{!user.Email__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:commandButton action="{!saveuser}" value="Save"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,34 @@
+<apex:page controller="loginPageController"  sidebar="false" showHeader="false">
+	<apex:slds />
+    <apex:form styleClass="slds-scope slds-box">
+		<apex:pageBlock rendered="{!statestatus == true}">
+            <apex:outputText value="Enter your Email or Login! If you need to create profile - click 'Sing Up' button"/><br/>
+            <apex:pageblockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Email or Login:" />
+                    <apex:inputText value="{!username}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Password:" />
+                    <apex:inputSecret value="{!password}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+            <apex:commandButton action="{!logup}" value="Log Up" styleClass="slds-button slds-button_success"/>
+            <apex:commandButton action="{!signin}" value="Sing In" styleClass="slds-button slds-button_brand"/>
+        </apex:pageBlock>    
+        <apex:pageBlock id="signin_block" rendered="{!statestatus == false}">
+            <apex:pageBlockSection id="signin_block--section">
+                <apex:inputText value="{!username}" label="Login"/>
+                <apex:inputText value="{!email}" label="Email"/>
+                <apex:inputText value="{!name}" label="Name"/>
+                <apex:inputSecret value="{!Password}" label="Password:"/>
+                <apex:inputCheckbox value="{!admin}" label="Admin "/>
+                <div>
+                    <apex:commandButton action="{!logIn}" value="Log In" styleClass="slds-button slds-button_brand"/>
+                	<apex:commandButton action="{!signup}" value="Sign Up" styleClass="slds-button slds-button_success"/>
+                </div>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:pageMessages ></apex:pageMessages>
+</apex:page>
